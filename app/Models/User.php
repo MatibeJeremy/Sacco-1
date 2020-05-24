@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\MailResetPasswordNotification;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -20,7 +21,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email','about','phoneNumber'
     ];
 
     /**
@@ -133,6 +134,23 @@ class User extends Authenticatable implements JWTSubject
             return true;
         }
         return false;
+    }
+
+    public function verifyUser()
+    {
+        return $this->hasOne('App\Models\VerifyUser');
+    }
+
+    /**
+     * Send the password reset notification
+     * @param string $token
+     *
+     * @return void
+     */
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify( new MailResetPasswordNotification($token));
     }
 
 }

@@ -14,13 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::group(['namespace' => 'Api\V1', 'prefix' => 'v1'], function () {
+
+    Route::post('sendMail', 'ResetPasswordController@sendMail');
+    Route::post('resetPassword', 'ResetPasswordController@process');
 
     // authentication routes
     Route::group(['prefix' => 'auth'], function () {
         Route::post('register', 'AuthController@register');
+        Route::get('/user/verify/{token}', 'AuthController@verifyUser');
         Route::post('login', 'AuthController@login');
         Route::post('logout', 'AuthController@logout');
+
     });
 
     // all routes that require jwt verification
@@ -42,10 +48,10 @@ Route::group(['namespace' => 'Api\V1', 'prefix' => 'v1'], function () {
 
         // users routes
         Route::group(['prefix' => 'users'], function() {
-            Route::get('/', 'UserController@index');
+            Route::get('/', 'AuthController@me');
             Route::get('/{id}', 'UserController@show');
             Route::post('/', 'UserController@store');
-            Route::put('/{id}', 'UserController@update');
+            Route::put('update', 'MeController@update');
         });
     });
 });

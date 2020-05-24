@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="x-apple-disable-message-reformatting"  content=""/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>{{ action_tag }}</title>
+    <title>RE/SYST</title>
     <style type="text/css" media="all">
         /* Base ------------------------------ */
 
@@ -377,7 +377,8 @@
     <![endif]-->
 </head>
 <body>
-<span class="pre-header">Use this link to activate your email address.</span>
+<a href="{{url('user/verify', $user->verifyUser->token)}}"> <span class="pre-header">Use this link to activate your email address.</span></a>
+
 <table cellpadding="0"
        cellspacing="0"
        class="email-wrapper"
@@ -393,7 +394,7 @@
                 <tr>
                     <td class="email-masthead">
                         <a class="f-fallback email-masthead_name"
-                           href="{{ client_url }}">{{ organization_name }}</a>
+                           href="{{url('user/verify', $user->verifyUser->token)}}" </a>
                     </td>
                 </tr>
 
@@ -410,9 +411,9 @@
                             <tr>
                                 <td class="content-cell">
                                     <div class="f-fallback">
-                                        <h1>Hi {{given_names}},</h1>
+                                        <h1>Hi {{$user['name']}},</h1>
 
-                                        <p>{{mail_message}}</p>
+                                        <p> Your registered email-id is {{$user['email']}} , Please click on the below link to verify your email account</p>
 
                                         <!-- Action -->
                                         <table align="center"
@@ -434,8 +435,8 @@
                                                         <tr>
                                                             <td align="center">
                                                                 <a class="f-fallback button button--yellow"
-                                                                   href="{{action_url}}"
-                                                                   target="_blank">{{action}}</a>
+                                                                   href="{{url('user/verify', $user->verifyUser->token)}}"
+                                                                   target="_blank">Activate</a>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -445,7 +446,7 @@
 
                                         <p>
                                             Thanks,<br>
-                                            The {{ organization_name }} Team
+                                            The RE/SYST Team
                                         </p>
                                         <!-- Sub copy -->
 
@@ -454,7 +455,7 @@
                                                 <td>
                                                     <p class="f-fallback sub">If you are having trouble with the button above, copy and paste the URL below into your web browser.</p>
 
-                                                    <p class="f-fallback sub">{{action_url}}</p>
+                                                    <p class="f-fallback sub">{{url('user/verify', $user->verifyUser->token)}}</p>
                                                 </td>
                                             </tr>
                                         </table>
@@ -477,11 +478,11 @@
                             <tr>
                                 <td align="center" class="content-cell">
                                     <p class="f-fallback sub align-center">
-                                        &copy; {{ copyright_year }} {{ organization_name}}. All rights reserved.
+                                        &copy; RE/SYST. All rights reserved.
                                     </p>
 
-                                    <p class="f-fallback sub align-center">{{ organization_name}}<br>
-                                        {{ organization_address }}
+                                    <p class="f-fallback sub align-center">RE/SYST<br>
+                                        Corp.
                                     </p>
                                 </td>
                             </tr>
