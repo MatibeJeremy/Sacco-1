@@ -45,7 +45,7 @@ class AuthController extends Controller
     public function register(Request $request) {
         // Set your sms app credentials
         $username   = "sandbox";
-        $apiKey     = "c2ce24cfae870831362bc20f322b1ef5541df2117109aff90634b1567dba19dd";
+        $apiKey     = "acc46e1bf50355506cce3a173382a18d9dbdfbbc821b25f71c528c6ec534dcc3";
 
         // Initialize the SDK
         $AT         = new AfricasTalking($username, $apiKey);
